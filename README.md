@@ -143,6 +143,7 @@ AI Services (OpenAI, NLP, MediaPipe - future)
 
 ## 📂 Project Structure
 
+
 talent-ai-platform/
 │
 ├── frontend/ → Mobile application (React Native)
