@@ -159,9 +159,8 @@ talent-ai-platform/
 ├── .gitignore
 ├── LICENSE
 └── README.md
----
 
----
+
 ## 📅 Development Roadmap
 
 ### 🟢 Week 1 — Setup & Authentication
