@@ -143,14 +143,22 @@ AI Services (OpenAI, NLP, MediaPipe - future)
 
 ## 📂 Project Structure
 
-
+```
 talent-ai-platform/
 │
-├── frontend/ → Mobile application (React Native)
-├── backend/ → API & business logic
-├── docs/ → Architecture, sprint plans, diagrams
+├── frontend/              # React Native mobile application
+│   ├── screens/           # App screens (Login, Dashboard, etc.)
+│   ├── components/        # Reusable UI components
+│   ├── navigation/        # Navigation configuration
+│   └── firebaseConfig.js  # Firebase setup
+│
+├── backend/               # Backend APIs & business logic (future)
+│
+├── docs/                  # Documentation (architecture, sprint plans)
+│
+├── .gitignore
+├── LICENSE
 └── README.md
-
 ---
 
 ## 📅 Development Roadmap
