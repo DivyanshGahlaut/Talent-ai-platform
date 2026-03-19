@@ -161,6 +161,7 @@ talent-ai-platform/
 └── README.md
 ---
 
+---
 ## 📅 Development Roadmap
 
 ### 🟢 Week 1 — Setup & Authentication
