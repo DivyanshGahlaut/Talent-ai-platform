@@ -2,7 +2,7 @@
 AI-powered hiring platform with resume builder, resume screening, and intelligent interview system for students and recruiters.
 # 🚀 Talent AI Platform
 
-> An AI-powered hiring ecosystem that bridges the gap between **students and recruiters (HR)** using intelligent resume analysis, job matching, and AI-driven interview systems.
+> An AI-powered hiring ecosystem that connects **students and recruiters (HR)** using resume analysis, job matching, and AI-driven interview systems.
 
 ---
 
@@ -10,27 +10,27 @@ AI-powered hiring platform with resume builder, resume screening, and intelligen
 
 Traditional hiring processes are:
 
-* Time-consuming for HRs
+* Time-consuming for recruiters
 * Unstructured for students
-* Lacking real-time feedback
+* Lack real-time feedback
 
-Students don’t know:
+Students often don’t know:
 
-* Why they get rejected ❌
-* How to improve their resume ❌
-* How to prepare for interviews ❌
+* Why they get rejected
+* How to improve their resume
+* How to prepare for interviews
 
 ---
 
 ## 💡 Solution
 
-**Talent AI Platform** solves this by providing:
+**Talent AI Platform** provides:
 
 * 📄 Smart Resume Builder
-* 🤖 AI Resume Analyzer (Score + Suggestions)
-* 🎯 Job Matching System (HR side)
-* 🎤 AI Interview System (Upcoming)
-* 📊 Analytics Dashboard (HR insights)
+* 🤖 AI Resume Analyzer (score + suggestions)
+* 🎯 Job Matching System
+* 🎤 AI Interview System (upcoming)
+* 📊 HR Analytics Dashboard (upcoming)
 
 ---
 
@@ -40,7 +40,7 @@ Students don’t know:
 
 #### 📄 Resume Builder
 
-* Multiple professional templates
+* Multiple templates
 * ATS-friendly structure
 * Sections:
 
@@ -57,25 +57,25 @@ Students don’t know:
 
 #### 🤖 Resume Analyzer
 
-* AI-based scoring system
+* AI-based scoring
 * Grammar & keyword analysis
 * Missing section detection
-* Suggestions for improvement
+* Improvement suggestions
 
 ---
 
 #### 🎤 Mock Interview (Upcoming)
 
 * AI-generated questions
-* Real-time feedback
-* Confidence & response analysis
+* Feedback on answers
+* Confidence analysis
 
 ---
 
 #### 🧪 Domain-Based Tests (Upcoming)
 
-* Coding (CS students)
-* Aptitude
+* Coding tests (CS students)
+* Aptitude tests
 * Domain-specific quizzes
 
 ---
@@ -91,17 +91,16 @@ Students don’t know:
 
 #### 📊 Resume Screening
 
-* AI-based match score
+* AI match score
 * Skill gap detection
 * Candidate ranking
 
 ---
 
-#### 📈 Analytics Dashboard (Upcoming)
+#### 📈 Analytics (Upcoming)
 
 * Selection vs rejection ratio
-* Performance insights
-* Interview feedback analysis
+* Candidate performance insights
 
 ---
 
@@ -126,18 +125,18 @@ AI Services (OpenAI, NLP, MediaPipe - future)
 ### ⚙️ Backend
 
 * Firebase (Auth + Firestore + Storage)
-* Node.js (Future scalability)
+* Node.js (future)
 
 ### 🗄️ Database
 
-* Firestore (Initial)
-* MongoDB (Future upgrade)
+* Firestore (initial)
+* MongoDB (future upgrade)
 
-### 🤖 AI Integration
+### 🤖 AI
 
-* OpenAI API (Resume analysis & Q&A)
-* MediaPipe (Gesture analysis - future)
-* Speech-to-Text APIs (future)
+* OpenAI API
+* NLP-based resume parsing
+* MediaPipe (future for gesture analysis)
 
 ---
 
@@ -147,19 +146,21 @@ AI Services (OpenAI, NLP, MediaPipe - future)
 talent-ai-platform/
 │
 ├── frontend/              # React Native mobile application
-│   ├── screens/           # App screens (Login, Dashboard, etc.)
+│   ├── screens/           # App screens
 │   ├── components/        # Reusable UI components
-│   ├── navigation/        # Navigation configuration
-│   └── firebaseConfig.js  # Firebase setup
+│   ├── navigation/        # Navigation setup
+│   └── firebaseConfig.js  # Firebase configuration
 │
-├── backend/               # Backend APIs & business logic (future)
+├── backend/               # Backend APIs (future)
 │
-├── docs/                  # Documentation (architecture, sprint plans)
+├── docs/                  # Documentation
 │
 ├── .gitignore
 ├── LICENSE
 └── README.md
+```
 
+---
 
 ## 📅 Development Roadmap
 
@@ -179,7 +180,7 @@ talent-ai-platform/
 
 ---
 
-### 🟠 Week 3 — Resume Analyzer (AI)
+### 🟠 Week 3 — Resume Analyzer
 
 * Resume upload
 * AI feedback system
@@ -206,50 +207,48 @@ talent-ai-platform/
 ## 🚀 Future Enhancements
 
 * 🎥 AI Avatar Interviewer
-* 🧍 Gesture & Posture Analysis
-* 🎙️ Voice Emotion Detection
-* 📊 Advanced HR Analytics
-* 🌐 Web Dashboard for HR
+* 🧍 Gesture & posture detection
+* 🎙️ Voice emotion analysis
+* 📊 Advanced analytics dashboard
 
 ---
 
-## 🔐 Security & Privacy
+## 🔐 Security
 
-* Secure authentication (Firebase Auth)
-* Encrypted data storage
+* Firebase Authentication
 * Role-based access (Student / HR)
+* Secure data storage
+
 ---
 
-## 🧪 How to Run the Project
+## 📸 Screenshots
+
+(To be added after UI development)
+
+---
+
+## 🧪 Run Locally
 
 ```bash
-# Clone repository
-git clone https://github.com/your-username/talent-ai-platform.git
-
-# Go to frontend
+git clone https://github.com/DivyanshGahlaut/talent-ai-platform.git
 cd frontend
-
-# Install dependencies
 npm install
-
-# Start app
 npm start
 ```
 
 ---
 
-## 🤝 Contribution
+## 👨‍💻 Author
 
-This project is currently under development. Contributions, ideas, and feedback are welcome.
-
----
-
-## 📌 Author
-
-**Divyansh Gahlaut*
+**Divyansh Rana**
 B.Tech AIML Student
 
 ---
+
+## ⭐ Support
+
+If you like this project, give it a ⭐ on GitHub!
+
 
 
 If you like this project, give it a ⭐ on GitHub!
