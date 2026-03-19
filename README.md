@@ -210,16 +210,6 @@ talent-ai-platform/
 * Secure authentication (Firebase Auth)
 * Encrypted data storage
 * Role-based access (Student / HR)
-
----
-
-## 📸 Screenshots (To Be Added)
-
-* Login Screen
-* Resume Builder
-* Dashboard
-* HR Panel
-
 ---
 
 ## 🧪 How to Run the Project
