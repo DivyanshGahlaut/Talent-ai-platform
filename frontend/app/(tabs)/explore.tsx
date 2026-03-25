@@ -1,112 +1,311 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { Collapsible } from '@/components/ui/collapsible';
-import { ExternalLink } from '@/components/external-link';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import Animated, { useAnimatedStyle, withRepeat, withTiming, useSharedValue, withSequence, interpolate } from 'react-native-reanimated';
 import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Fonts } from '@/constants/theme';
+import { Colors } from '@/constants/Colors';
 
-export default function TabTwoScreen() {
+const { width } = Dimensions.get('window');
+
+export default function MockInterviewScreen() {
+  const [isInterviewing, setIsInterviewing] = useState(false);
+  const mouthAnim = useSharedValue(8);
+  const waveAnim = useSharedValue(1);
+
+  useEffect(() => {
+    if (isInterviewing) {
+      mouthAnim.value = withRepeat(
+        withSequence(withTiming(16, { duration: 150 }), withTiming(8, { duration: 150 })),
+        -1,
+        true
+      );
+      waveAnim.value = withRepeat(
+        withSequence(withTiming(1.5, { duration: 500 }), withTiming(1, { duration: 500 })),
+        -1,
+        true
+      );
+    } else {
+      mouthAnim.value = 8;
+      waveAnim.value = 1;
+    }
+  }, [isInterviewing]);
+
+  const animatedMouthStyle = useAnimatedStyle(() => ({
+    height: mouthAnim.value,
+  }));
+
+  const animatedWaveStyle = useAnimatedStyle(() => ({
+    transform: [{ scaleY: waveAnim.value }],
+  }));
+
+  if (!isInterviewing) {
+    return (
+      <View style={styles.container}>
+        <View style={styles.setupCard}>
+          <ThemedText style={styles.setupTitle}>⚙️ Setup Your Mock Interview</ThemedText>
+          <ThemedText style={styles.label}>Interview Type</ThemedText>
+          <View style={styles.pickerPlaceholder}><ThemedText style={{color: '#fff'}}>SDE-1 Technical</ThemedText></View>
+          
+          <ThemedText style={[styles.label, {marginTop: 16}]}>Duration</ThemedText>
+          <View style={styles.pickerPlaceholder}><ThemedText style={{color: '#fff'}}>30 minutes</ThemedText></View>
+
+          <TouchableOpacity style={{marginTop: 32}} onPress={() => setIsInterviewing(true)}>
+            <LinearGradient colors={['#6366F1', '#4F46E5']} style={styles.startBtn}>
+              <ThemedText style={styles.startBtnText}>🎤 Start Mock Interview</ThemedText>
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText
-          type="title"
-          style={{
-            fontFamily: Fonts.rounded,
-          }}>
-          Explore
-        </ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image
-          source={require('@/assets/images/react-logo.png')}
-          style={{ width: 100, height: 100, alignSelf: 'center' }}
-        />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user&apos;s current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful{' '}
-          <ThemedText type="defaultSemiBold" style={{ fontFamily: Fonts.mono }}>
-            react-native-reanimated
-          </ThemedText>{' '}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+    <ScrollView style={styles.container} contentContainerStyle={styles.scrollContent}>
+      <View style={styles.avatarPanel}>
+        <View style={styles.aiAvatar}>
+          <View style={styles.aiFace}>
+            <View style={styles.aiEyeContainer}>
+              <View style={styles.aiEye} />
+              <View style={styles.aiEye} />
+            </View>
+            <Animated.View style={[styles.aiMouth, animatedMouthStyle]} />
+          </View>
+        </View>
+
+        <View style={styles.soundWaves}>
+          <Animated.View style={[styles.waveBar, animatedWaveStyle]} />
+          <Animated.View style={[styles.waveBar, { height: 20 }, animatedWaveStyle]} />
+          <Animated.View style={[styles.waveBar, { height: 10 }, animatedWaveStyle]} />
+          <Animated.View style={[styles.waveBar, { height: 24 }, animatedWaveStyle]} />
+          <Animated.View style={[styles.waveBar, { height: 12 }, animatedWaveStyle]} />
+        </View>
+
+        <ThemedText style={styles.aiName}>ARIA — AI Interviewer</ThemedText>
+        <ThemedText style={styles.aiStatus}>Asking Question 1 of 6</ThemedText>
+
+        <View style={styles.questionBubble}>
+          <ThemedText style={styles.questionText}>
+            Tell me about yourself and walk me through your resume. What makes you a good fit for this role?
+          </ThemedText>
+        </View>
+
+        <View style={styles.actions}>
+          <TouchableOpacity style={styles.actionBtn}>
+            <ThemedText style={styles.actionBtnText}>Next Question ⟶</ThemedText>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.actionBtn, styles.dangerBtn]} onPress={() => setIsInterviewing(false)}>
+            <ThemedText style={styles.actionBtnText}>End Interview</ThemedText>
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      <View style={[styles.card, { marginTop: 20 }]}>
+        <ThemedText style={styles.cardTitle}>Real-Time Analysis</ThemedText>
+        <View style={styles.analysisGrid}>
+          <MetricPill label="Eye Contact" status="Good" color={Colors.green} />
+          <MetricPill label="Posture" status="Slouching" color={Colors.amber} />
+          <MetricPill label="Voice" status="Clear" color={Colors.green} />
+          <MetricPill label="Confidence" status="72%" color={Colors.indigo} />
+        </View>
+      </View>
+    </ScrollView>
+  );
+}
+
+function MetricPill({ label, status, color }: any) {
+  return (
+    <View style={styles.metricPill}>
+      <View style={[styles.dot, { backgroundColor: color }]} />
+      <ThemedText style={styles.pillText}>{label}: {status}</ThemedText>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
+  container: {
+    flex: 1,
+    backgroundColor: Colors.bg,
   },
-  titleContainer: {
+  scrollContent: {
+    padding: 24,
+    paddingTop: 60,
+  },
+  setupCard: {
+    backgroundColor: Colors.card,
+    borderRadius: 24,
+    padding: 32,
+    marginTop: 100,
+    marginHorizontal: 10,
+    borderWidth: 1,
+    borderColor: Colors.border,
+  },
+  setupTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginBottom: 24,
+    textAlign: 'center',
+  },
+  label: {
+    fontSize: 14,
+    color: Colors.muted,
+    marginBottom: 8,
+  },
+  pickerPlaceholder: {
+    backgroundColor: Colors.bg2,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    padding: 14,
+    borderRadius: 12,
+  },
+  startBtn: {
+    padding: 18,
+    borderRadius: 12,
+    alignItems: 'center',
+  },
+  startBtnText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  avatarPanel: {
+    backgroundColor: Colors.card,
+    borderRadius: 24,
+    padding: 32,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: Colors.border,
+  },
+  aiAvatar: {
+    width: 140,
+    height: 140,
+    marginBottom: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  aiFace: {
+    width: 100,
+    height: 120,
+    backgroundColor: '#162032',
+    borderRadius: 50,
+    borderWidth: 2,
+    borderColor: '#2A3F5F',
+    alignItems: 'center',
+    paddingTop: 30,
+  },
+  aiEyeContainer: {
     flexDirection: 'row',
+    gap: 30,
+    marginBottom: 20,
+  },
+  aiEye: {
+    width: 14,
+    height: 14,
+    backgroundColor: Colors.indigo,
+    borderRadius: 7,
+  },
+  aiMouth: {
+    width: 28,
+    borderRadius: 14,
+    backgroundColor: Colors.indigo,
+    position: 'absolute',
+    bottom: 25,
+  },
+  soundWaves: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    height: 30,
+    marginBottom: 16,
+  },
+  waveBar: {
+    width: 3,
+    height: 14,
+    backgroundColor: Colors.indigo,
+    borderRadius: 2,
+  },
+  aiName: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginBottom: 4,
+  },
+  aiStatus: {
+    fontSize: 13,
+    color: Colors.teal,
+    marginBottom: 24,
+  },
+  questionBubble: {
+    backgroundColor: Colors.card2,
+    borderLeftWidth: 3,
+    borderLeftColor: Colors.indigo,
+    padding: 16,
+    borderRadius: 12,
+    width: '100%',
+  },
+  questionText: {
+    fontSize: 14,
+    color: '#fff',
+    lineHeight: 22,
+  },
+  actions: {
+    flexDirection: 'row',
+    gap: 12,
+    marginTop: 24,
+  },
+  actionBtn: {
+    backgroundColor: Colors.card2,
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: Colors.border,
+  },
+  dangerBtn: {
+    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+    borderColor: Colors.red,
+  },
+  actionBtnText: {
+    color: '#fff',
+    fontSize: 13,
+    fontWeight: '600',
+  },
+  card: {
+    backgroundColor: Colors.card,
+    borderRadius: 20,
+    padding: 20,
+    borderWidth: 1,
+    borderColor: Colors.border,
+  },
+  cardTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginBottom: 16,
+  },
+  analysisGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: 8,
+  },
+  metricPill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: Colors.card2,
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: Colors.border,
+  },
+  dot: {
+    width: 7,
+    height: 7,
+    borderRadius: 4,
+    marginRight: 6,
+  },
+  pillText: {
+    fontSize: 12,
+    color: '#fff',
   },
 });
